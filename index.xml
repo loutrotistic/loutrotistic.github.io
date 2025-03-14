@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Loutre Blog</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Loutre Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 Mar 2025 19:41:42 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AST</title>
+      <link>http://localhost:1313/post/ast/</link>
+      <pubDate>Fri, 14 Mar 2025 19:41:42 +0100</pubDate>
+      <guid>http://localhost:1313/post/ast/</guid>
+      <description>&lt;h1 id=&#34;what-is-abstract-syntax-tree-&#34;&gt;What is Abstract Syntax Tree ?&lt;/h1&gt;</description>
+    </item>
+  </channel>
+</rss>
