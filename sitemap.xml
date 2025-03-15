@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://loutrotistic.github.io/post/ast/</loc>
-    <lastmod>2025-03-14T19:41:42+01:00</lastmod>
+    <loc>https://loutrotistic.github.io/about/</loc>
+    <lastmod>2025-03-15T17:15:17+01:00</lastmod>
   </url><url>
     <loc>https://loutrotistic.github.io/</loc>
+    <lastmod>2025-03-15T17:15:17+01:00</lastmod>
+  </url><url>
+    <loc>https://loutrotistic.github.io/posts/ast/</loc>
     <lastmod>2025-03-14T19:41:42+01:00</lastmod>
   </url><url>
-    <loc>https://loutrotistic.github.io/post/</loc>
+    <loc>https://loutrotistic.github.io/posts/</loc>
     <lastmod>2025-03-14T19:41:42+01:00</lastmod>
   </url><url>
     <loc>https://loutrotistic.github.io/categories/</loc>

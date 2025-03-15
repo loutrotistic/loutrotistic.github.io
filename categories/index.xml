@@ -6,6 +6,7 @@
     <description>Recent content in Categories on Loutre Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
+    <copyright>© Loutre</copyright>
     <atom:link href="https://loutrotistic.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
