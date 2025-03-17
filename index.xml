@@ -7,8 +7,15 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>© Loutre</copyright>
-    <lastBuildDate>Sat, 15 Mar 2025 17:15:17 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 17 Mar 2025 22:56:45 +0100</lastBuildDate>
     <atom:link href="https://loutrotistic.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WRITEUP - Cap HackTheBox</title>
+      <link>https://loutrotistic.github.io/posts/cap/</link>
+      <pubDate>Mon, 17 Mar 2025 22:56:45 +0100</pubDate>
+      <guid>https://loutrotistic.github.io/posts/cap/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://loutrotistic.github.io/images/Cap1.png&#34; alt=&#34;alt text&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;First, we use nmap to see the services running on this server:&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;~&amp;gt; nmap -sV 10.10.10.245 -p- --min-rate &lt;span style=&#34;color:#ae81ff&#34;&gt;5000&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;PORT   STATE SERVICE VERSION&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;21/tcp open  ftp     vsftpd 3.0.3&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;22/tcp open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Ubuntu Linux; protocol 2.0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;80/tcp open  http    Gunicorn&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We check for service version if there is some vuln exploitable to get a direct access to the server, but there is not.&#xA;So we go check the website on port 80.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>About</title>
       <link>https://loutrotistic.github.io/about/</link>
