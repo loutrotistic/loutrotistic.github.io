@@ -2,6 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Loutre Blog</title>
+<<<<<<< HEAD
     <link>https://loutrotistic.github.io/posts/</link>
     <description>Recent content in Posts on Loutre Blog</description>
     <generator>Hugo</generator>
@@ -22,6 +23,27 @@
       <pubDate>Fri, 14 Mar 2025 19:41:42 +0100</pubDate>
       <guid>https://loutrotistic.github.io/posts/ast/</guid>
       <description>&lt;h1 id=&#34;what-is-abstract-syntax-tree-&#34;&gt;What is Abstract Syntax Tree ?&lt;/h1&gt;&#xA;&lt;p&gt;Here I will present to you the results of my research on AST, which helped me to solve the &lt;a href=&#34;https://www.root-me.org/fr/Challenges/Web-Client/AST-Deobfuscation&#34;&gt;AST Deobfuscation&lt;/a&gt; challenge on RootMe.&lt;/p&gt;&#xA;&lt;p&gt;Abstract Syntax Tree is a data structure to represent the structure of a program. It is a tree representation of the abstract syntax structure of text written in a formal language.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://loutrotistic.github.io/images/AST1.png&#34; alt=&#34;alt text&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;We call this structure &amp;ldquo;Abstract&amp;rdquo; because it does not show every details appearing in the original syntax.&lt;/p&gt;</description>
+=======
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Loutre Blog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 25 Jun 2025 21:12:29 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>THM Industrial CTF - PWN : Industrial</title>
+      <link>http://localhost:1313/posts/pwn_industrial_ctf/</link>
+      <pubDate>Wed, 25 Jun 2025 21:12:29 +0200</pubDate>
+      <guid>http://localhost:1313/posts/pwn_industrial_ctf/</guid>
+      <description>Writeup of the PWN challenge Industrial</description>
+    </item>
+    <item>
+      <title>Abstract Syntax Tree</title>
+      <link>http://localhost:1313/posts/ast/</link>
+      <pubDate>Fri, 14 Mar 2025 19:41:42 +0100</pubDate>
+      <guid>http://localhost:1313/posts/ast/</guid>
+      <description>My research about AST</description>
+>>>>>>> 456f0e9 (Add Pwn Chall)
     </item>
   </channel>
 </rss>
