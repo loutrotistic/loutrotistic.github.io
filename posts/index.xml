@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Loutre Blog</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://loutrotistic.github.io/posts/</link>
     <description>Recent content in Posts on Loutre Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 25 Jun 2025 21:12:29 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://loutrotistic.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>THM Industrial CTF - PWN : Industrial</title>
-      <link>http://localhost:1313/posts/pwn_industrial_ctf/</link>
+      <link>https://loutrotistic.github.io/posts/pwn_industrial_ctf/</link>
       <pubDate>Wed, 25 Jun 2025 21:12:29 +0200</pubDate>
-      <guid>http://localhost:1313/posts/pwn_industrial_ctf/</guid>
+      <guid>https://loutrotistic.github.io/posts/pwn_industrial_ctf/</guid>
       <description>Writeup of the PWN challenge Industrial</description>
     </item>
     <item>
       <title>Abstract Syntax Tree</title>
-      <link>http://localhost:1313/posts/ast/</link>
+      <link>https://loutrotistic.github.io/posts/ast/</link>
       <pubDate>Fri, 14 Mar 2025 19:41:42 +0100</pubDate>
-      <guid>http://localhost:1313/posts/ast/</guid>
+      <guid>https://loutrotistic.github.io/posts/ast/</guid>
       <description>My research about AST</description>
     </item>
   </channel>

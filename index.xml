@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Loutre Blog</title>
-    <link>http://localhost:1313/</link>
+    <link>https://loutrotistic.github.io/</link>
     <description>Recent content on Loutre Blog</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 25 Jun 2025 21:12:29 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://loutrotistic.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>THM Industrial CTF - PWN : Industrial</title>
-      <link>http://localhost:1313/posts/pwn_industrial_ctf/</link>
+      <link>https://loutrotistic.github.io/posts/pwn_industrial_ctf/</link>
       <pubDate>Wed, 25 Jun 2025 21:12:29 +0200</pubDate>
-      <guid>http://localhost:1313/posts/pwn_industrial_ctf/</guid>
+      <guid>https://loutrotistic.github.io/posts/pwn_industrial_ctf/</guid>
       <description>Writeup of the PWN challenge Industrial</description>
     </item>
     <item>
       <title>About Me</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://loutrotistic.github.io/about/</link>
       <pubDate>Fri, 14 Mar 2025 19:41:42 +0100</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://loutrotistic.github.io/about/</guid>
       <description>&lt;p&gt;Hello ! My name is Younes, also known as Loutre online.&lt;/p&gt;&#xA;&lt;p&gt;I am a french engineering student and a cybersecurity enthousiast.&#xA;I started learning cybersecurity few months ago and I want to work in this domain. I am currently looking for an apprenticeship in cybersecurity to improve my knowledge and skills.&lt;/p&gt;&#xA;&lt;p&gt;I am gonna post some writeups and new things I learn.&lt;/p&gt;&#xA;&lt;p&gt;Here my accounts on &lt;a href=&#34;https://root-me.org/loutrotistic&#34;&gt;RootMe&lt;/a&gt;, &lt;a href=&#34;https://app.hackthebox.com/users/2225829&#34;&gt;HackTheBox&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Abstract Syntax Tree</title>
-      <link>http://localhost:1313/posts/ast/</link>
+      <link>https://loutrotistic.github.io/posts/ast/</link>
       <pubDate>Fri, 14 Mar 2025 19:41:42 +0100</pubDate>
-      <guid>http://localhost:1313/posts/ast/</guid>
+      <guid>https://loutrotistic.github.io/posts/ast/</guid>
       <description>My research about AST</description>
     </item>
   </channel>
